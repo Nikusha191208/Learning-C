@@ -13,7 +13,7 @@ void sayHello(char *name);
 int add(int, int);
 
 
-int main(){
+int main(void){
 
   startprogam("testing if i can pass parameter:)");
 
