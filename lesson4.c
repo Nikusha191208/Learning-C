@@ -7,7 +7,7 @@ void printNumbers(int, int);
 int main(void){
   int num1 = 25;
   int num2 = 34;
-  
+
   printNumbers(num1, num2);
 
   swap(&num1, &num2);
