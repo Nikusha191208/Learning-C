@@ -25,4 +25,4 @@ int main(){
 
 void printHuman(struct Human *human){
    printf("Name: %s, Age: %d, Balance: %.1f\n", human->name, human->age, human->balance);
-}
+} 
