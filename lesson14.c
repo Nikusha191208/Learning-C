@@ -4,6 +4,7 @@
 int inpi(char*);
 float inpf(char*);
 char *inps(char*);
+char inpc(char*);
 
 int main(void){
 	int programLoop = 1;
@@ -30,6 +31,24 @@ int main(void){
 
 			free(inp);
 		} 
+		else if (inp == 3){
+			char inp = inpc("Enter Char: ");
+
+			int num = inp - '0';
+			printf("\nPrinting as Int: %d\n", num);
+		} 
+		else if (inp == 4){
+			int inp = inpi("Enter Int: ");
+
+			char character = '0' + inp;
+			printf("\nPrinting as Char: %d\n", character);
+		}
+		else if (inp == 5){
+			programLoop = 0;
+		} 
+		else {
+			printf("\nIncorrect Command");
+		}
 	}
 }
 
@@ -60,3 +79,11 @@ char* inps(char *msg){
 	return inp;
 }			
 
+char inpc(char *msg){
+	printf("\n%s", msg);
+
+	char inp;
+	scanf(" %c", &inp);
+
+	return inp;
+}
