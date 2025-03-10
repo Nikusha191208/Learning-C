@@ -1,26 +1,36 @@
 #include <stdio.h>
 
-void swap(int*, int*);
+void startprogam(){
+  printf("program started.\n");
+}
 
-void printNumbers(int, int);
+void endprogram(void){
+  printf("program ended.\n");
+}
+
+void sayHello(char *name);
+
+int add(int, int);
+
 
 int main(void){
-  int num1 = 25;
-  int num2 = 34;
 
-  printNumbers(num1, num2);
+  startprogam("testing if i can pass parameter:)");
 
-  swap(&num1, &num2);
+  sayHello("Nikoloz"); 
+  
+  int a = 50;
+  int b = 75;
+  printf("%d + %d = %d", a, b, add(a,b));
 
-  printNumbers(num1, num2);
+  endprogram();
 }
 
-void swap(int *num1Ptr, int *num2Ptr){
-  int temp = *num1Ptr;
-  *num1Ptr = *num2Ptr;
-  *num2Ptr = temp;
+
+void sayHello(char *name){
+  printf("Hello %s\n", name);
 }
 
-void printNumbers(int num1, int num2){
-  printf("Num1: %d\nNum2: %d\n", num1, num2);
+int add(int a, int b){
+  return a + b;
 }

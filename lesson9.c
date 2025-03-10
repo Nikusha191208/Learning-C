@@ -1,28 +1,66 @@
 #include <stdio.h>
 
-typedef int bool;
+void _readFile_(char *path);
+void _writeFile_(char *path);
 
-typedef struct {
-	char *model;
-	int year;
-	float prize;
-	bool secondHand;
-} Car;
-
-void printCar(Car *car);
 
 int main(void){
-	Car car1 = {"BMW", 2011, 5999.9, 0};
-	Car car2 = {"Mercedes", 2009, 3500.0, 1};
 
-	printCar(&car1);
-	printCar(&car1);
+	char filePath[] = "lesson8.txt";
+
+	int programIsRunning = 1;
+	while (programIsRunning){
+		printf("\nRead = 0, Write = 1, EndProgram = 2: ");
+		int userInput;
+		scanf("%d", &userInput);
+
+		if (userInput == 0)
+			_readFile_(filePath);
+		else if (userInput == 1)
+			_writeFile_(filePath);
+		else if (userInput == 2)
+			programIsRunning = 0;
+		else 
+			printf("\nIncorect Input!");
+	}
+
+	printf("\nProgram Ended.\n");
+
 }
 
-void printCar(Car *car){
-	printf("\nModel: %s\nYear: %d\nPrize: %.2f\nSecondHand: %s\n",
-			car->model,
-			car->year,
-			car->prize,
-			car->secondHand ? "true" : "false");
+
+void _readFile_(char *path){
+	FILE *file = fopen(path, "r");
+
+	if (file == NULL){
+		fprintf(stderr, "\nERROR: can't find file!");
+	} else {
+		char buffer[1000];
+		int lineCount = 1;
+
+		while ( fgets(buffer, sizeof buffer, file) != NULL ){
+			printf("\n%d. %s", lineCount, buffer);
+
+			lineCount++;
+		}
+	}
+
+	fclose(file);
 }
+
+void _writeFile_(char *path){
+	FILE *file = fopen(path, "w");
+
+	if (file == NULL){
+		fprintf(stderr, "\nERROR: can't find file!");
+	} else {
+		printf("\nWrite Your Note: ");
+		char buffer[1000];
+		scanf("%s", buffer);
+
+		fputs(buffer, file); 
+	}
+
+	fclose(file);
+}
+

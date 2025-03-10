@@ -1,18 +1,28 @@
 #include <stdio.h>
 
-int size(void *_arrPtr_);
+typedef int bool;
+
+typedef struct {
+	char *model;
+	int year;
+	float prize;
+	bool secondHand;
+} Car;
+
+void printCar(Car *car);
 
 int main(void){
-	char *name = "Nikoloz";
-	printf("Size: %d\n", size(name));
+	Car car1 = {"BMW", 2011, 5999.9, 0};
+	Car car2 = {"Mercedes", 2009, 3500.0, 1};
+
+	printCar(&car1);
+	printCar(&car1);
 }
 
-int size(void *_arrPtr_){
-	char *arrPtr = _arrPtr_;
-	int i = 0;
-
-	while (*arrPtr++ != '\0')
-		i++;
-
-	return i;
+void printCar(Car *car){
+	printf("\nModel: %s\nYear: %d\nPrize: %.2f\nSecondHand: %s\n",
+			car->model,
+			car->year,
+			car->prize,
+			car->secondHand ? "true" : "false");
 }

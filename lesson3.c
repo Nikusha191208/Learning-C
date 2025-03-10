@@ -1,36 +1,37 @@
 #include <stdio.h>
-
-void startprogam(){
-  printf("program started.\n");
-}
-
-void endprogram(void){
-  printf("program ended.\n");
-}
-
-void sayHello(char *name);
-
-int add(int, int);
-
+#include <stdlib.h>
 
 int main(void){
 
-  startprogam("testing if i can pass parameter:)");
+  char *name = "Nikoloz";
+  char class = 'b';
+  int age = 16;
+  float balance = 256.6;
+  printf("Name: %s\nClass: %c\nAge: %d\nBalance: %f Lari\n", name, class, age, balance);
 
-  sayHello("Nikoloz"); 
-  
-  int a = 50;
-  int b = 75;
-  printf("%d + %d = %d", a, b, add(a,b));
+  printf("Sizeof int: %zu\nSizeof float: %zu\nSizeof Char: %zu\nSizeof char*: %zu\n", sizeof(int), sizeof(float), sizeof(char), sizeof(char*));
 
-  endprogram();
-}
+  printf("He Is %s\n", age >= 18 ? "Adult" : "Is Not Adult");
 
+  printf("Do You Want To Generate Random Number? (1/0)");
+  int userRes;
+  scanf("%d", &userRes);
 
-void sayHello(char *name){
-  printf("Hello %s\n", name);
-}
+  switch (userRes){
+  case 1:
+    printf("Random Number Is %d\n", rand());
+  break;
+  default:
+    printf("Incorrect Commmand!\n");
+    /* No Break! */
+  case 0: 
+    printf("Nothing Is Generated!\n");
+    break;
+  }
 
-int add(int a, int b){
-  return a + b;
+  printf("Enter Count Down Number: ");
+  int count;
+  scanf("%d", &count);
+  for (int i = count; i >= 0; i--)
+    printf("%d\n", i);
 }

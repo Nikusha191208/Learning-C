@@ -1,5 +1,4 @@
-#include <stdio.h>
 
-void print(char *msg){
-	printf("%s\n", msg);
-}
+const float PI = 3.14f;
+
+const float GRAVITY = 9.9f;

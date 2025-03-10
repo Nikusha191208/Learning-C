@@ -1,28 +1,23 @@
 #include <stdio.h>
+#include <string.h>
 
-struct Human {
-   char *name;
-   int age;
-   float balance;
-};
+int main(void){
 
-void printHuman(struct Human*);
+   char name[] = "Nikoloz";
+   char *lastName = "Lortkipanidze";
 
+   printf("Name: %s(%d chars)\nLastname: %s(%d chars)\n", name, strlen(name), lastName, strlen(lastName));
 
-int main(){
+   char *namePtr = name;
 
-   struct Human human1 = {.name = "Nikoloz", .age = 16, .balance = 355.4 };
+   char nameCopy[strlen(name)];
+   strcpy(nameCopy, name);
 
-   struct Human human2 = human1;
-   human2.name = "Dimitri";
-   human2.age = 14;
-  
-   printHuman(&human1);
-   printHuman(&human2);
+   namePtr[0] = 'D';
+   name[1] = 'o';
+   nameCopy[2] = 'l';
+
+   printf("namePtr: %s\nname: %s\nnameCopy: %s\n", namePtr, name, nameCopy);
 
 }
 
-
-void printHuman(struct Human *human){
-   printf("Name: %s, Age: %d, Balance: %.1f\n", human->name, human->age, human->balance);
-} 

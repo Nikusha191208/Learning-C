@@ -1,23 +1,61 @@
 #include <stdio.h>
-#include <string.h>
 
-int main(void){
+char turn = 'X';
 
-   char name[] = "Nikoloz";
-   char *lastName = "Lortkipanidze";
+void getMove(char board[][3]);
 
-   printf("Name: %s(%d chars)\nLastname: %s(%d chars)\n", name, strlen(name), lastName, strlen(lastName));
+void getCoords(int *, int *);
 
-   char *namePtr = name;
+void checkCoords(int *, int *, char [][3]);
 
-   char nameCopy[strlen(name)];
-   strcpy(nameCopy, name);
+void changeTurn(void);
 
-   namePtr[0] = 'D';
-   name[1] = 'o';
-   nameCopy[2] = 'l';
+void displayBoard(char board[][3]);
 
-   printf("namePtr: %s\nname: %s\nnameCopy: %s\n", namePtr, name, nameCopy);
+int main(){
+   char board[3][3] = {
+      {'-','-','-'},
+      {'-','-','-'},
+      {'-','-','-'}
+   };
 
+   while (1)
+      getMove(board);
 }
 
+void getMove(char board[][3]){
+   int rowMove, colMove;
+   getCoords(&rowMove, &colMove);
+   checkCoords(&rowMove, &colMove, board);
+   displayBoard(board);
+}  
+
+void getCoords(int *rowMove, int *colMove){
+   printf("Insert %c Somewhere: ", turn);
+   scanf("%d %d", rowMove, colMove);
+}
+
+void checkCoords(int *rowMove, int *colMove, char board[][3]){
+  while (board[*rowMove][*colMove] != '-' || *rowMove < 0 || *rowMove > 2 || *colMove < 0 || *colMove > 2){
+    printf("Invalid Move, Try Again: ");
+    scanf("%d %d", rowMove, colMove);
+  }
+
+  board[*rowMove][*colMove] = turn;
+  changeTurn();
+}
+
+void changeTurn(void){
+   if (turn == 'X')
+      turn = 'O';
+   else
+      turn = 'X';
+}
+
+void displayBoard(char board[][3]){
+   for (int row = 0; row < 3; row++){
+      for (int col = 0; col < 3; col++)
+         printf("%c ", board[row][col]);
+      printf("\n");
+   }
+}

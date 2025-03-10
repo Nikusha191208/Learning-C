@@ -1,28 +1,50 @@
 #include <stdio.h>
-
-int var = 25;
-
-void fun1(){
-	printf("fun1 var: %d\n", var);
-}
-
-void fun2(){
-	int var = 330;
-	printf("fun2 var: %d\n", var);
-}
+#include <stdlib.h>
 
 int main(void){
-	printf("main outer var: %d\n", var);
 
-	{
-		int var = 100;
-		printf("main inner var: %d\n", var);
+	int gameLoop = 1;
+	int userInpt;
 
-		{
-			printf("main inner inner var: %d\n", var);
+
+	int *arrPtr;
+	int size = 0;
+	int addValue;
+
+	while (gameLoop){
+
+		printf("\nExit: 0, Push: 1, Cut Last: 2, Print: 3 >>> ");
+		scanf("%d", &userInpt);
+
+		switch (userInpt) {
+			case 0:
+				gameLoop = 0;
+				break;
+			case 1:
+				printf("\nNumber To Push: ");
+				scanf("%d", &addValue);
+
+				if (size == 0){
+					arrPtr = malloc(sizeof(float));
+				} else {
+					arrPtr = realloc(arrPtr, (size + 1) * sizeof(float));
+				}
+
+				arrPtr[size] = addValue;
+				size++;
+				break;
+			case 2:
+				if (size > 0)
+					arrPtr = realloc(arrPtr, --size);
+				break;
+			case 3:
+				printf("\nArr: ");
+				for (int i = 0; i < size; i++)
+					printf("%d ", arrPtr[i]);
+				break;
 		}
+
 	}
 
-	fun1();
-	fun2();
+	free(arrPtr);
 }

@@ -1,61 +1,26 @@
 #include <stdio.h>
 
-char turn = 'X';
+void swap(int*, int*);
 
-void getMove(char board[][3]);
+void printNumbers(int, int);
 
-void getCoords(int *, int *);
+int main(void){
+  int num1 = 25;
+  int num2 = 34;
 
-void checkCoords(int *, int *, char [][3]);
+  printNumbers(num1, num2);
 
-void changeTurn(void);
+  swap(&num1, &num2);
 
-void displayBoard(char board[][3]);
-
-int main(){
-   char board[3][3] = {
-      {'-','-','-'},
-      {'-','-','-'},
-      {'-','-','-'}
-   };
-
-   while (1)
-      getMove(board);
+  printNumbers(num1, num2);
 }
 
-void getMove(char board[][3]){
-   int rowMove, colMove;
-   getCoords(&rowMove, &colMove);
-   checkCoords(&rowMove, &colMove, board);
-   displayBoard(board);
-}  
-
-void getCoords(int *rowMove, int *colMove){
-   printf("Insert %c Somewhere: ", turn);
-   scanf("%d %d", rowMove, colMove);
+void swap(int *num1Ptr, int *num2Ptr){
+  int temp = *num1Ptr;
+  *num1Ptr = *num2Ptr;
+  *num2Ptr = temp;
 }
 
-void checkCoords(int *rowMove, int *colMove, char board[][3]){
-  while (board[*rowMove][*colMove] != '-' || *rowMove < 0 || *rowMove > 2 || *colMove < 0 || *colMove > 2){
-    printf("Invalid Move, Try Again: ");
-    scanf("%d %d", rowMove, colMove);
-  }
-
-  board[*rowMove][*colMove] = turn;
-  changeTurn();
-}
-
-void changeTurn(void){
-   if (turn == 'X')
-      turn = 'O';
-   else
-      turn = 'X';
-}
-
-void displayBoard(char board[][3]){
-   for (int row = 0; row < 3; row++){
-      for (int col = 0; col < 3; col++)
-         printf("%c ", board[row][col]);
-      printf("\n");
-   }
+void printNumbers(int num1, int num2){
+  printf("Num1: %d\nNum2: %d\n", num1, num2);
 }

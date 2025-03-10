@@ -1,33 +1,89 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-extern const float PI;
-extern const float GRAVITY;
-
-static int a = 50;
-static int b = 60;
-
-void birthday(){
-	static int age;
-
-	age++;
-
-	printf("\nYou are now %d years old.", age);
-}
-
-void printMath(){
-	printf("\nPI: %2f", PI);
-	printf("\nGravity: %2f", GRAVITY);
-}
-
-int add(int *restrict a, int *restrict b){
-	return *a + *b;
-}
+int inpi(char*);
+float inpf(char*);
+char *inps(char*);
+char inpc(char*);
 
 int main(void){
-	for (register int i = 0; i < 10; i++)
-		birthday();
+	int programLoop = 1;
+	while (programLoop){
+		int inp = inpi("\nNum to S: 1, S to Num: 2, Char to Int: 3, Int to Char: 4, endProgram: 5 >>> ");
 
-	printMath();
+		if (inp == 1){
+			float inp = inpf("\nEnter Number: ");
+			char string[10];
+			snprintf(string, 10, "%f", inp);
+			printf("\nPrinting as String: %s", string);
+		} 
+		else if (inp == 2){
+			char *inp = inps("\nEnter String: ");
 
-	printf("\n%d + %d = %d", a, b, add(&a,&b));
+			char *log;
+			float num = strtof(inp, &log);
+
+			if (log[0] == '\0'){
+				printf("\nPrinting as Number: %f", num);
+			} else {
+				printf("\nCan't Convert To Number, Error -> (%s)", log);
+			}
+
+			free(inp);
+		} 
+		else if (inp == 3){
+			char inp = inpc("Enter Char: ");
+
+			int num = inp - '0';
+			printf("\nPrinting as Int: %d\n", num);
+		} 
+		else if (inp == 4){
+			int inp = inpi("Enter Int: ");
+
+			char character = '0' + inp;
+			printf("\nPrinting as Char: %d\n", character);
+		}
+		else if (inp == 5){
+			programLoop = 0;
+		} 
+		else {
+			printf("\nIncorrect Command");
+		}
+	}
+}
+
+int inpi(char *msg){
+	printf("\n%s", msg);
+
+	int inp;
+	scanf("%i", &inp);
+
+	return inp;
+}
+
+float inpf(char *msg){
+	printf("\n%s", msg);
+
+	float inp;
+	scanf("%f", &inp);
+
+	return inp;
+}
+
+char* inps(char *msg){
+	printf("\n%s", msg);
+
+	char *inp = malloc(10);
+	scanf("%s", inp);
+
+	return inp;
+}			
+
+char inpc(char *msg){
+	printf("\n%s", msg);
+
+	char inp;
+	scanf(" %c", &inp);
+
+	return inp;
 }
